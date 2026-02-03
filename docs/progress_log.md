@@ -7,4 +7,11 @@
 - Identified class imbalance in attrition
 - Categorized numerical and categorical features
 - Observed early relationship between overtime and attrition
-~
+## Day 3
+- Conducted exploratory data analysis (EDA)
+- Analyzed attrition distribution and class imbalance
+- Identified key drivers: overtime, job satisfaction, income
+- Derived business insights from visual patterns
+
+
+ 
