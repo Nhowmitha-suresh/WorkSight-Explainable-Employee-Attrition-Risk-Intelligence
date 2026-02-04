@@ -12,6 +12,11 @@
 - Analyzed attrition distribution and class imbalance
 - Identified key drivers: overtime, job satisfaction, income
 - Derived business insights from visual patterns
+## Day 4 (Continued)
+- Interpreted feature correlation heatmap
+- Identified strongly related and redundant features
+- Shortlisted key drivers influencing attrition
+
 
 
  
