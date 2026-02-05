@@ -16,6 +16,11 @@
 - Interpreted feature correlation heatmap
 - Identified strongly related and redundant features
 - Shortlisted key drivers influencing attrition
+## Day 5
+- Cleaned dataset and removed irrelevant columns
+- Encoded categorical variables using one-hot encoding
+- Scaled numerical features
+- Prepared model-ready train and test datasets
 
 
 
