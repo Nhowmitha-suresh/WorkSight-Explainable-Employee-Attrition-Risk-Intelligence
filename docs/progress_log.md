@@ -21,6 +21,11 @@
 - Encoded categorical variables using one-hot encoding
 - Scaled numerical features
 - Prepared model-ready train and test datasets
+## Day 6
+- Trained baseline Logistic Regression model
+- Evaluated model using confusion matrix and classification report
+- Identified recall as a key metric for attrition prediction
+
 
 
 
