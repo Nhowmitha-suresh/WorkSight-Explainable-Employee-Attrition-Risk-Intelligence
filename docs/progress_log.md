@@ -25,6 +25,16 @@
 - Trained baseline Logistic Regression model
 - Evaluated model using confusion matrix and classification report
 - Identified recall as a key metric for attrition prediction
+## Day 7 – Model Improvement & Evaluation
+
+- Trained an improved Random Forest model for employee attrition prediction
+- Applied class balancing to handle imbalanced attrition data
+- Generated predictions on the test dataset
+- Evaluated model performance using confusion matrix and classification report
+- Achieved high overall accuracy but identified low recall for attrition cases
+- Analyzed false negatives as a critical risk in HR decision-making
+- Compared Random Forest performance with baseline Logistic Regression
+- Identified recall improvement as the next key objective
 
 
 
