@@ -26,7 +26,6 @@
 - Evaluated model using confusion matrix and classification report
 - Identified recall as a key metric for attrition prediction
 ## Day 7 – Model Improvement & Evaluation
-
 - Trained an improved Random Forest model for employee attrition prediction
 - Applied class balancing to handle imbalanced attrition data
 - Generated predictions on the test dataset
@@ -35,6 +34,12 @@
 - Analyzed false negatives as a critical risk in HR decision-making
 - Compared Random Forest performance with baseline Logistic Regression
 - Identified recall improvement as the next key objective
+## Day 8 – Explainable AI (SHAP)
+- Implemented Explainable AI using SHAP for Random Forest model
+- Handled SHAP compatibility and additivity issues for ensemble models
+- Generated global explanations to identify key attrition drivers
+- Created individual-level explanations for personalized risk analysis
+- Improved transparency, trust, and interpretability of predictions
 
 
 
