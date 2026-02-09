@@ -40,6 +40,11 @@
 - Generated global explanations to identify key attrition drivers
 - Created individual-level explanations for personalized risk analysis
 - Improved transparency, trust, and interpretability of predictions
+## Day 9 – Threshold Tuning & Recall Improvement
+- Generated probability-based predictions using Random Forest
+- Tuned classification threshold to improve attrition recall
+- Reduced false negatives for high-risk employees
+- Balanced precision–recall trade-off for HR decision-making
 
 
 
