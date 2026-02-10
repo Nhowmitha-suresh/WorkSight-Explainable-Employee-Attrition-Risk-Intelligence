@@ -45,6 +45,12 @@
 - Tuned classification threshold to improve attrition recall
 - Reduced false negatives for high-risk employees
 - Balanced precision–recall trade-off for HR decision-making
+## Day 10 – Class Imbalance Handling (SMOTE)
+- Applied SMOTE to balance attrition classes in training data
+- Retrained Random Forest model on balanced dataset
+- Evaluated performance improvements in recall
+- Compared imbalance handling with threshold tuning
+
 
 
 
