@@ -50,6 +50,12 @@
 - Retrained Random Forest model on balanced dataset
 - Evaluated performance improvements in recall
 - Compared imbalance handling with threshold tuning
+## Day 11 – Final Model Selection
+- Compared baseline, threshold tuning, and SMOTE models
+- Evaluated recall, precision, F1-score, and business impact
+- Selected final production-ready model
+- Justified decision based on HR risk reduction strategy
+
 
 
 
