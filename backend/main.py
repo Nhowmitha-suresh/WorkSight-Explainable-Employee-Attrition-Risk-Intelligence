@@ -5,81 +5,89 @@ import numpy as np
 import os
 from typing import List
 
-# --------------------------------------------------
-# Configuration
-# --------------------------------------------------
+# -------------------------------
+# CONFIGURATION
+# -------------------------------
 
-MODEL_PATH = "final_model.pkl"
-THRESHOLD = 0.3  # tuned threshold for higher recall
+MODEL_PATH = "models/final_model.pkl"
+THRESHOLD = 0.3
+MODEL_VERSION = "1.0.0"
 
-# --------------------------------------------------
-# Initialize FastAPI App
-# --------------------------------------------------
+# -------------------------------
+# CREATE FASTAPI APP
+# -------------------------------
 
 app = FastAPI(
     title="WorkSight – Employee Attrition Risk API",
     description="Production-ready ML API for predicting employee attrition risk",
-    version="1.0.0"
+    version=MODEL_VERSION
 )
 
-# --------------------------------------------------
-# Load Model at Startup
-# --------------------------------------------------
+# -------------------------------
+# LOAD MODEL
+# -------------------------------
 
 if not os.path.exists(MODEL_PATH):
-    raise FileNotFoundError(f"Model file '{MODEL_PATH}' not found!")
+    raise FileNotFoundError(f"Model file not found at {MODEL_PATH}")
 
 with open(MODEL_PATH, "rb") as f:
     model = pickle.load(f)
 
-# Get expected feature count from model
 EXPECTED_FEATURES = model.n_features_in_
 
-# --------------------------------------------------
-# Input Schema
-# --------------------------------------------------
+# -------------------------------
+# INPUT SCHEMA
+# -------------------------------
 
 class EmployeeFeatures(BaseModel):
     features: List[float] = Field(
         ...,
         description="List of encoded and scaled feature values",
-        example=[0.1] * EXPECTED_FEATURES
+        example=[0.0] * EXPECTED_FEATURES
     )
 
-# --------------------------------------------------
-# Health Check Endpoint
-# --------------------------------------------------
+# -------------------------------
+# ROOT ENDPOINT
+# -------------------------------
 
 @app.get("/")
 def home():
     return {
         "message": "WorkSight Attrition Risk API is running",
+        "model_version": MODEL_VERSION,
         "expected_feature_count": EXPECTED_FEATURES,
         "decision_threshold": THRESHOLD
     }
 
-# --------------------------------------------------
-# Prediction Endpoint
-# --------------------------------------------------
+# -------------------------------
+# HEALTH CHECK
+# -------------------------------
+
+@app.get("/health")
+def health():
+    return {
+        "status": "healthy",
+        "model_loaded": True,
+        "expected_features": EXPECTED_FEATURES
+    }
+
+# -------------------------------
+# PREDICTION ENDPOINT
+# -------------------------------
 
 @app.post("/predict")
 def predict(data: EmployeeFeatures):
 
-    # Validate feature length
     if len(data.features) != EXPECTED_FEATURES:
         raise HTTPException(
             status_code=400,
-            detail=f"Expected {EXPECTED_FEATURES} features, but received {len(data.features)}"
+            detail=f"Expected {EXPECTED_FEATURES} features, got {len(data.features)}"
         )
 
     try:
-        # Convert to numpy array
         features_array = np.array(data.features).reshape(1, -1)
-
-        # Predict probability
         probability = model.predict_proba(features_array)[0][1]
 
-        # Apply business threshold logic
         if probability >= THRESHOLD:
             risk_category = "High Risk"
         elif probability >= 0.15:
@@ -90,7 +98,9 @@ def predict(data: EmployeeFeatures):
         return {
             "attrition_risk_probability": round(float(probability), 4),
             "risk_category": risk_category,
-            "decision_threshold": THRESHOLD
+            "decision_threshold": THRESHOLD,
+            "model_version": MODEL_VERSION,
+            "feature_count": EXPECTED_FEATURES
         }
 
     except Exception as e:
