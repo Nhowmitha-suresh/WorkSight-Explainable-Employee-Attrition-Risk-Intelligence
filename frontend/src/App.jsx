@@ -1,33 +1,33 @@
 import { useState } from "react";
 
 function App() {
-  const [features, setFeatures] = useState("");
+  const [features, setFeatures] = useState(Array(5).fill(""));
   const [result, setResult] = useState(null);
-  const [error, setError] = useState(null);
+
+  const handleChange = (index, value) => {
+    const updated = [...features];
+    updated[index] = value;
+    setFeatures(updated);
+  };
 
   const handleSubmit = async () => {
-    try {
-      setError(null);
-      const featureArray = features.split(",").map(Number);
+    const featureArray = features.map(Number);
 
-      const response = await fetch("http://127.0.0.1:8000/predict", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ features: featureArray }),
-      });
+    const response = await fetch("http://127.0.0.1:8000/predict", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ features: featureArray }),
+    });
 
-      if (!response.ok) {
-        throw new Error("Prediction failed");
-      }
+    const data = await response.json();
+    setResult(data);
+  };
 
-      const data = await response.json();
-      setResult(data);
-
-    } catch (err) {
-      setError("Error connecting to backend. Make sure FastAPI is running.");
-    }
+  const getRiskColor = () => {
+    if (!result) return "white";
+    if (result.risk_category === "High Risk") return "#ef4444";
+    if (result.risk_category === "Medium Risk") return "#f59e0b";
+    return "#22c55e";
   };
 
   return (
@@ -38,40 +38,49 @@ function App() {
       padding: "40px",
       fontFamily: "Arial"
     }}>
-      <h1>WorkSight – Attrition Risk Dashboard</h1>
+      <h1>WorkSight HR Attrition Intelligence</h1>
 
-      <p>Enter feature values separated by commas:</p>
+      <div style={{ marginTop: "30px" }}>
+        <h3>Employee Feature Inputs</h3>
 
-      <textarea
-        rows="4"
-        style={{ width: "100%", padding: "10px", marginTop: "10px" }}
-        value={features}
-        onChange={(e) => setFeatures(e.target.value)}
-      />
+        {features.map((value, index) => (
+          <input
+            key={index}
+            type="number"
+            placeholder={`Feature ${index + 1}`}
+            value={value}
+            onChange={(e) => handleChange(index, e.target.value)}
+            style={{
+              display: "block",
+              marginBottom: "10px",
+              padding: "8px",
+              width: "200px"
+            }}
+          />
+        ))}
 
-      <button
-        onClick={handleSubmit}
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          background: "#3b82f6",
-          border: "none",
-          color: "white",
-          cursor: "pointer"
-        }}
-      >
-        Predict Risk
-      </button>
-
-      {error && (
-        <p style={{ color: "red", marginTop: "20px" }}>{error}</p>
-      )}
+        <button
+          onClick={handleSubmit}
+          style={{
+            marginTop: "20px",
+            padding: "10px 20px",
+            background: "#3b82f6",
+            border: "none",
+            color: "white",
+            cursor: "pointer"
+          }}
+        >
+          Analyze Risk
+        </button>
+      </div>
 
       {result && (
-        <div style={{ marginTop: "30px" }}>
+        <div style={{ marginTop: "40px" }}>
           <h2>Prediction Result</h2>
           <p>Probability: {result.attrition_risk_probability}</p>
-          <p>Category: {result.risk_category}</p>
+          <p style={{ color: getRiskColor(), fontWeight: "bold" }}>
+            Category: {result.risk_category}
+          </p>
         </div>
       )}
     </div>

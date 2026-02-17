@@ -75,6 +75,20 @@
 - Implemented health monitoring endpoint
 - Integrated business decision logic layer
 - Strengthened feature validation and error handling
+## Day 15 – Frontend Initialization & API Integration
+- Initialized React frontend using Vite
+- Structured frontend inside dedicated `frontend/vite-project` directory
+- Built initial dark-themed dashboard layout
+- Implemented feature input textarea for testing predictions
+- Connected frontend to FastAPI `/predict` endpoint
+- Enabled CORS middleware in backend for cross-origin requests
+- Successfully tested end-to-end prediction flow (Frontend → Backend → Model → Response)
+## Day 16 – UI Enhancement
+- Replaced raw feature textarea with structured numeric inputs
+- Added dynamic risk color indicators
+- Improved dark theme layout
+- Refined frontend UX for HR readability
+
 
 
 
