@@ -1,8 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [features, setFeatures] = useState(Array(5).fill(""));
+  const [featureCount, setFeatureCount] = useState(0);
+  const [features, setFeatures] = useState([]);
   const [result, setResult] = useState(null);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/")
+      .then(res => res.json())
+      .then(data => {
+        const count = data.expected_feature_count;
+        setFeatureCount(count);
+        setFeatures(Array(count).fill(""));
+      })
+      .catch(() => {
+        alert("Backend not running!");
+      });
+  }, []);
 
   const handleChange = (index, value) => {
     const updated = [...features];
@@ -40,9 +54,9 @@ function App() {
     }}>
       <h1>WorkSight HR Attrition Intelligence</h1>
 
-      <div style={{ marginTop: "30px" }}>
-        <h3>Employee Feature Inputs</h3>
+      <h3>Model expects {featureCount} features</h3>
 
+      <div style={{ marginTop: "20px" }}>
         {features.map((value, index) => (
           <input
             key={index}
@@ -52,30 +66,30 @@ function App() {
             onChange={(e) => handleChange(index, e.target.value)}
             style={{
               display: "block",
-              marginBottom: "10px",
-              padding: "8px",
+              marginBottom: "8px",
+              padding: "6px",
               width: "200px"
             }}
           />
         ))}
-
-        <button
-          onClick={handleSubmit}
-          style={{
-            marginTop: "20px",
-            padding: "10px 20px",
-            background: "#3b82f6",
-            border: "none",
-            color: "white",
-            cursor: "pointer"
-          }}
-        >
-          Analyze Risk
-        </button>
       </div>
 
+      <button
+        onClick={handleSubmit}
+        style={{
+          marginTop: "20px",
+          padding: "10px 20px",
+          background: "#3b82f6",
+          border: "none",
+          color: "white",
+          cursor: "pointer"
+        }}
+      >
+        Analyze Risk
+      </button>
+
       {result && (
-        <div style={{ marginTop: "40px" }}>
+        <div style={{ marginTop: "30px" }}>
           <h2>Prediction Result</h2>
           <p>Probability: {result.attrition_risk_probability}</p>
           <p style={{ color: getRiskColor(), fontWeight: "bold" }}>
