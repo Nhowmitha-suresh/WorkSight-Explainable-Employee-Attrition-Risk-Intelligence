@@ -88,7 +88,17 @@
 - Added dynamic risk color indicators
 - Improved dark theme layout
 - Refined frontend UX for HR readability
-
+## Day 17 – Dynamic Frontend Integration
+- Integrated frontend with backend root endpoint
+- Dynamically loaded expected feature count
+- Automatically generated input fields based on model configuration
+- Improved scalability and maintainability of UI layer
+## Day 18 – Demo-Ready Dashboard
+- Simplified UI by removing raw feature grid
+- Added “Load Sample Employee” functionality
+- Improved UX with loading state
+- Refined professional dark layout
+- Prepared dashboard for live demonstration
 
 
 
