@@ -99,6 +99,11 @@
 - Improved UX with loading state
 - Refined professional dark layout
 - Prepared dashboard for live demonstration
+## Day 19 – Architecture & Product Framing
+- Added model metadata endpoint
+- Improved API design with structured routes
+- Documented system architecture in README
+- Enhanced interview-level explanation readiness    
 
 
 
