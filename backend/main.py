@@ -4,6 +4,24 @@ import pickle
 import numpy as np
 import os
 from typing import List
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+@app.get("/model-info")
+def model_info():
+    return {
+        "model_version": MODEL_VERSION,
+        "model_type": "Random Forest Classifier",
+        "feature_count": EXPECTED_FEATURES,
+        "decision_threshold": THRESHOLD,
+        "class_labels": ["No Attrition", "Attrition"]
+    }
 
 # -------------------------------
 # CONFIGURATION
