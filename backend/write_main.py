@@ -1,4 +1,4 @@
-
+content = r"""
 import os
 import pickle
 import numpy as np
@@ -165,3 +165,7 @@ def predict(data: EmployeeFeatures):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8000)
+"""
+with open('main.py','w',encoding='utf-8') as f:
+    f.write(content)
+print('main.py rewritten')
