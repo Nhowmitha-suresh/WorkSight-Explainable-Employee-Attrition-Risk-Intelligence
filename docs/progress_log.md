@@ -104,6 +104,13 @@
 - Improved API design with structured routes
 - Documented system architecture in README
 - Enhanced interview-level explanation readiness    
+## Day 20 – Production Hardening
+- Cleaned backend directory structure
+- Removed temporary debug/test files
+- Added requirements.txt for deployment
+- Updated .gitignore
+- Verified production Uvicorn run
+- Confirmed API stability
 
 
 
