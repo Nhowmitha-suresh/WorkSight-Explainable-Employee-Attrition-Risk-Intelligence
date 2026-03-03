@@ -111,6 +111,11 @@
 - Updated .gitignore
 - Verified production Uvicorn run
 - Confirmed API stability
+## Day 21 – Explainability & Presentation Upgrade
+- Replaced SHAP feature indexes with actual feature names  
+- Improved frontend to display human-readable contributing factors  
+- Enhanced business-level interpretation of predictions  
+- Updated documentation to reflect full-stack and explainable AI integration  
 
 
 
